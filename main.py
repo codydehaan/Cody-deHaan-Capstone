@@ -77,11 +77,11 @@ for stripe in range(
 
 def game_instructions():
     """
-    Loops through an instructions list, displays a black background,
+    Loops through an instructions list, displays a black background, 
     and displays the centered text in white.
     """
     instructions = ["Press the space-bar to move forward",
-                    "Release to stop",                             # List of instructions
+                    "Release to stop",             # List of instructions
                     "Good luck making it home!"]
     for count in instructions:  # Loops through the instructions list
         screen.fill(BLACK)  # Fills screen black
@@ -99,7 +99,7 @@ def game_instructions():
 
 def show_countdown():
     """
-    Loops through a countdown list, displays a black background,
+    Loops through a countdown list, displays a black background, 
     and displays the centered text in white.
     """
     for count in ["3", "2", "1", "GO!"]:  # Loops through countdown list
@@ -170,8 +170,7 @@ while RUNNING:
 
     # Update Light
     current_time = pygame.time.get_ticks()  # Captures the current time
-    # If enough time has passed and difference > light duration it's time to
-    # switch the light
+    # If enough time has passed and difference > light duration it's time to switch the light
     if current_time - LAST_SWITCH_TIME > LIGHT_DURATION:
         if LIGHT_COLOR == "green":  # Light is green
             LIGHT_COLOR = "yellow"  # Then changes to yellow
