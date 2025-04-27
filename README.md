@@ -1,5 +1,3 @@
-# Cody-deHaan-Capstone
-
 # Red Light, Green Light - Home From Work
 
 A simple Pygame-based, 2D, road scrolling game. User controls a car driving home from work.
@@ -25,3 +23,11 @@ If the user moves on a red light the game will end. The game focuses on testing 
 
 - Python 3.13
 - Pygame: To install this dependency use 'pip'.
+
+## Acknowledgements
+
+**A big THANK YOU to...**
+
+- VECTEEZY: For the car image!! (https://www.vecteezy.com/)
+- NCLabs: For getting me started on my coding journey.
+- Pygame: For providing a fantastic framework for creating 2D games in Python.
