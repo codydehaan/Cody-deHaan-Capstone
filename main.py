@@ -20,12 +20,12 @@ clock = pygame.time.Clock()  # Creates variable allowing use of internal clock
 font = pygame.font.SysFont(None, 48)  # Creates variable for users system font
 
 # Load Images
-CAR_IMG = pygame.transform.scale(pygame.image.load(
-    "images/VECTEEZY_CAR_IMG.png"), (250, 200))
+CAR_IMG = pygame.transform.scale(
+    pygame.image.load("images/VECTEEZY_CAR_IMG.png"), (250, 200))
 RED_LIGHT_IMG = pygame.image.load("images/RED_LIGHT_IMG.png")
 YELLOW_LIGHT_IMG = pygame.image.load("images/YELLOW_LIGHT_IMG.png")
 GREEN_LIGHT_IMG = pygame.image.load("images/GREEN_LIGHT_IMG.png")
-# Car image uses (.transform.scale) to resize (.image.load) of the car by W and H
+# Car image uses (.transform.scale) to resize (.image.load) of the car
 
 ### Game Constant Variables ###
 ## Car's state ##
@@ -38,7 +38,7 @@ MOVING = False  # Car stopped before beginning game
 LIGHT_COLOR = "green"  # Light set to green to begin game
 # Creates a variable for the milliseconds since the game started
 LAST_SWITCH_TIME = pygame.time.get_ticks()
-LIGHT_DURATION = 18000  # Light is green through the countdown and instructions
+LIGHT_DURATION = 18000  # Green through the countdown and instructions
 
 ## Game State ##
 GAME_OVER = False  # Games ending status
@@ -86,8 +86,8 @@ def game_instructions():
         screen.fill(BLACK)  # Fills screen black
         # Creates a variable for the WHITE countdown text
         text_surface = font.render(count, True, WHITE)
-        text_rect = text_surface.get_rect(
-            center=(width // 2, height // 2))  # Centers the text
+        text_rect = text_surface.get_rect(center=(
+            width // 2, height // 2))  # Centers the text
         screen.blit(text_surface, text_rect)  # Adds the text to the screen
         pygame.display.flip()  # Updates the display
         # Delays 3 seconds to allow user to read instructions
@@ -118,7 +118,8 @@ def reset_game():
     """
     Resets globally defined variables to reset the game.
     """
-    global LIGHT_COLOR, LAST_SWITCH_TIME, LIGHT_DURATION, MOVING, GAME_OVER, SCROLL, WIN, GAME_STARTED
+    global LIGHT_COLOR, LAST_SWITCH_TIME, LIGHT_DURATION
+    global MOVING, GAME_OVER, SCROLL, WIN, GAME_STARTED
 
     LIGHT_COLOR = "green"
     LAST_SWITCH_TIME = pygame.time.get_ticks()
@@ -186,10 +187,9 @@ while RUNNING:
         LAST_SWITCH_TIME = current_time
 
     # Update Scroll
-    if MOVING and not GAME_OVER:  # If moving is True and # game_over is False
-        # Scroll starts at 0 and decreases by car_speed (pixels)
-        SCROLL -= CAR_SPEED
-    if SCROLL <= -MAX_SCROLL and not GAME_OVER:  # If scroll ever reaches -max_scroll
+    if MOVING and not GAME_OVER:  # If moving is True and game_over is False
+        SCROLL -= CAR_SPEED # Scroll starts at 0 and decreases by car_speed
+    if SCROLL <= -MAX_SCROLL and not GAME_OVER:  # If scroll reaches -max_scroll
         GAME_OVER = True  # Game is over
         WIN = True  # User wins
 
@@ -199,8 +199,10 @@ while RUNNING:
 
     # Draw Scrolling Background
     SCROLL_X = SCROLL % width  # Creates a variable that loops 999-0
-    screen.blit(road_surface, (SCROLL_X - width, 0)) # Draws one surface off-screen to the left
-    screen.blit(road_surface, (SCROLL_X, 0))  # Draws another surface on-screen
+    # Draws one surface off-screen to the left
+    screen.blit(road_surface, (SCROLL_X - width, 0))
+    # Draws another surface on-screen
+    screen.blit(road_surface, (SCROLL_X, 0))
     # Together these surfaces loop repeatedly using our scroll_x variable
     ## Draw Car
     # Draws the car image at the designated x and y position
@@ -242,10 +244,12 @@ while RUNNING:
             # Draws the text on the screen
             screen.blit(text, (width // 2 - 160, height // 2 - 150))
         else:  # If win is True
-            text = font.render("Welcome home! Enjoy your evening!", True, GREEN)  # Winning text
+            text = font.render(
+                "Welcome home! Enjoy your evening!", True, GREEN) # Winning text
             # Draws the text on the screen
             screen.blit(text, (width // 2 - 300, height // 2 - 150))
-        restart_text = font.render("Press 'R' to restart", True, BLACK)  # Restart text
+        restart_text = font.render(
+            "Press 'R' to restart", True, BLACK) # Restart text
 
         # Draws text on screen in both cases
         screen.blit(restart_text, (width // 2 - 150, height // 2 - 100))
