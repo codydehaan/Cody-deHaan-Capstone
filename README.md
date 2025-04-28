@@ -30,5 +30,5 @@ If the user moves on a red light the game will end. The game focuses on testing 
 
 - VECTEEZY: For their car image. (https://www.vecteezy.com/)
 - Pixabay: For their stock mp3 audio. (https://pixabay.com/)
-- NCLabs: For getting me started on my coding journey. (https://nclab.com/)
+- NCLab: For getting me started on my coding journey. (https://nclab.com/)
 - Pygame: For providing a fantastic framework for creating 2D games in Python. (https://www.pygame.org/)
