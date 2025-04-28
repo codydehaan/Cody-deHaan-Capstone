@@ -9,6 +9,8 @@ import pygame  # Imports pygame package to create the game
 # Initialize Pygame
 # Initializes all pygame modules (Fonts, images, graphics, events)
 pygame.init()  # pylint: disable=no-member
+# Initializes the sound module in Pygame
+pygame.mixer.init()  # pylint: disable=no-member
 
 # Set up the window
 # Creates variables that set game window W and H (pixels)
@@ -21,11 +23,20 @@ font = pygame.font.SysFont(None, 48)  # Creates variable for users system font
 
 # Load Images
 CAR_IMG = pygame.transform.scale(
-    pygame.image.load("images/VECTEEZY_CAR_IMG.png"), (250, 200))
-RED_LIGHT_IMG = pygame.image.load("images/RED_LIGHT_IMG.png")
-YELLOW_LIGHT_IMG = pygame.image.load("images/YELLOW_LIGHT_IMG.png")
-GREEN_LIGHT_IMG = pygame.image.load("images/GREEN_LIGHT_IMG.png")
+    pygame.image.load("Images/VECTEEZY_CAR_IMG.png"), (250, 200)
+)
+RED_LIGHT_IMG = pygame.image.load("Images/RED_LIGHT_IMG.png")
+YELLOW_LIGHT_IMG = pygame.image.load("Images/YELLOW_LIGHT_IMG.png")
+GREEN_LIGHT_IMG = pygame.image.load("Images/GREEN_LIGHT_IMG.png")
 # Car image uses (.transform.scale) to resize (.image.load) of the car
+
+# Load Sound
+BG_AUDIO = pygame.mixer.music.load("Audio/Call_to_Adventure.mp3")
+pygame.mixer.music.set_volume(0.1)
+START_AUDIO = pygame.mixer.Sound("Audio/Zapsplat_Nissan_Start.mp3")
+ENGINE_AUDIO = pygame.mixer.Sound("Audio/AudiV8.mp3")
+BRAKE_AUDIO = pygame.mixer.Sound("Audio/Brake_Audio.mp3")
+CAR_LOCK = pygame.mixer.Sound("Audio/Car_Lock.mp3")
 
 ### Game Constant Variables ###
 ## Car's state ##
@@ -33,6 +44,7 @@ CAR_X = 350  # Cars x position
 CAR_Y = 350  # Cars y position
 CAR_SPEED = 10  # How fast we want the car to "move" in pixels
 MOVING = False  # Car stopped before beginning game
+CAR_LOCK_PLAYED = False  # Allows car lock audio to play once
 
 ## Traffic Light State ##
 LIGHT_COLOR = "green"  # Light set to green to begin game
@@ -47,13 +59,12 @@ WIN = False  # Games win status
 GAME_STARTED = False  # Games start status
 
 ## Scrolling ##
-MAX_SCROLL = 20000  # Distance in pixels needed to trigger win
+MAX_SCROLL = 1000  # Distance in pixels needed to trigger win
 PIXELS_PER_MILES = 1000  # Used to convert pixels to miles
 
 ## Colors ##
-WHITE = (255, 255, 255)
-# These color variables were created to organize coloring of items
-BLACK = (0, 0, 0)
+WHITE = (255, 255, 255)  # These color variables were
+BLACK = (0, 0, 0)  # Created to organize coloring of items
 RED = (200, 0, 0)  # Used in fonts, backgrounds, and fills
 GREEN = (0, 200, 0)  # Used to make later code easier to read
 GRAY = (100, 100, 100)
@@ -63,10 +74,12 @@ GRAY = (100, 100, 100)
 road_surface = pygame.Surface((width, height))
 road_surface.fill(GRAY)  # Fills the surface with GRAY
 
+# Stripe will become 0, 40, 80... until stripe reaches width
 for stripe in range(
-        # Stripe will become 0, 40, 80, 120... until stripe reaches width
-        # (1000)
-        0, width, 40):
+    0,
+    width,
+    40,
+):
     # Draws road stripes on road_surface
     pygame.draw.rect(road_surface, WHITE, (stripe, height // 2, 20, 10))
     # Every 40th x position half(//2) the height
@@ -79,19 +92,23 @@ def game_instructions():
     Loops through an instructions list, displays a black background,
     and displays the centered text in white.
     """
-    instructions = ["Press the space-bar to move forward",
-                    "Release to stop",             # List of instructions
-                    "Good luck making it home!"]
+    instructions = [
+        "Press the space-bar to move forward",
+        "Release to stop",  # List of instructions
+        "Good luck making it home!",
+    ]
     for count in instructions:  # Loops through the instructions list
         screen.fill(BLACK)  # Fills screen black
         # Creates a variable for the WHITE countdown text
         text_surface = font.render(count, True, WHITE)
-        text_rect = text_surface.get_rect(center=(
-            width // 2, height // 2))  # Centers the text
+        text_rect = text_surface.get_rect(
+            center=(width // 2, height // 2)
+        )  # Centers the text
         screen.blit(text_surface, text_rect)  # Adds the text to the screen
         pygame.display.flip()  # Updates the display
         # Delays 3 seconds to allow user to read instructions
         pygame.time.delay(3000)
+
 
 # Countdown Function
 
@@ -106,10 +123,12 @@ def show_countdown():
         # Creates a variable for the WHITE countdown text
         text_surface = font.render(count, True, WHITE)
         text_rect = text_surface.get_rect(
-            center=(width // 2, height // 2))  # Centers the text
+            center=(width // 2, height // 2)
+        )  # Centers text
         screen.blit(text_surface, text_rect)  # Adds the text to the screen
         pygame.display.flip()  # Updates the display
         pygame.time.delay(1500)  # Delays 1.5 seconds to simulate countdown
+
 
 # Reset Game Function
 
@@ -137,9 +156,12 @@ RUNNING = True
 while RUNNING:
     # If not game_started == True: (at this point it is not)
     if not GAME_STARTED:
+        pygame.mixer.music.play(-1, 0.0)  # Play the music from the beginning
+        START_AUDIO.play()  # Plays engine start-up audio
         game_instructions()  # And the instructions are displayed
         show_countdown()  # So the countdown begins
         GAME_STARTED = True  # And the game_started variable is turned to True
+        START_AUDIO.stop()  # Stops engine start-up audio
 
     # Keeps game running at fps for constant gameplay across devices
     clock.tick(60)
@@ -156,11 +178,14 @@ while RUNNING:
                 # Only if it is the space-bar key
                 if event.key == pygame.K_SPACE:  # pylint: disable=no-member
                     MOVING = True  # Set moving to True
+                    ENGINE_AUDIO.play()  # Plays the engine audio
             # If event is user releasing key
             if event.type == pygame.KEYUP:  # pylint: disable=no-member
                 # Only if it is the space-bar key
                 if event.key == pygame.K_SPACE:  # pylint: disable=no-member
                     MOVING = False  # Set moving back to False
+                    ENGINE_AUDIO.stop()  # Stops the engine audio
+                    BRAKE_AUDIO.play()  # Plays brake audio
         else:  # If game_over is True
             # If event is user pressing key
             if event.type == pygame.KEYDOWN:  # pylint: disable=no-member
@@ -178,17 +203,16 @@ while RUNNING:
             LIGHT_DURATION = random.randint(200, 1000)  # For a random duration
         elif LIGHT_COLOR == "yellow":  # Light is yellow
             LIGHT_COLOR = "red"  # Then changes to red
-            LIGHT_DURATION = random.randint(
-                1000, 8000)  # For a random duration
+            LIGHT_DURATION = random.randint(1000, 5000)  # For a random duration
         elif LIGHT_COLOR == "red":  # Light is red
             LIGHT_COLOR = "green"  # Then changes to green
-            LIGHT_DURATION = random.randint(100, 6000)  # For a random duration
+            LIGHT_DURATION = random.randint(500, 6000)  # For a random duration
         # Next light change happens based on new current time
         LAST_SWITCH_TIME = current_time
 
     # Update Scroll
     if MOVING and not GAME_OVER:  # If moving is True and game_over is False
-        SCROLL -= CAR_SPEED # Scroll starts at 0 and decreases by car_speed
+        SCROLL -= CAR_SPEED  # Scroll starts at 0 and decreases by car_speed
     if SCROLL <= -MAX_SCROLL and not GAME_OVER:  # If scroll reaches -max_scroll
         GAME_OVER = True  # Game is over
         WIN = True  # User wins
@@ -232,24 +256,26 @@ while RUNNING:
     # Variable calculating how far is left in pixels,
     # then we convert that to miles, and use max to not go negative
     miles_left = max(0, (MAX_SCROLL + SCROLL) // PIXELS_PER_MILES)
-     # Creates f"" to update variable
+    # Creates f"" to update variable
     miles_text = font.render(f"Miles to home: {miles_left}", True, BLACK)
     # Draws "Miles to home: XX" at x = 20 y = 20
     screen.blit(miles_text, (20, 20))
 
     # Show Game Over
     if GAME_OVER:  # If game_over is True
+        pygame.mixer.music.stop()  # Stop the background music
+        ENGINE_AUDIO.stop()  # Stops car audio
         if not WIN:  # If win is False
             text = font.render("You moved on RED!", True, RED)  # Losing text
             # Draws the text on the screen
             screen.blit(text, (width // 2 - 160, height // 2 - 150))
         else:  # If win is True
             text = font.render(
-                "Welcome home! Enjoy your evening!", True, GREEN) # Winning text
+                "Welcome home! Enjoy your evening!", True, GREEN
+            )  # Winning text
             # Draws the text on the screen
             screen.blit(text, (width // 2 - 300, height // 2 - 150))
-        restart_text = font.render(
-            "Press 'R' to restart", True, BLACK) # Restart text
+        restart_text = font.render("Press 'R' to restart", True, BLACK)  # Restart text
 
         # Draws text on screen in both cases
         screen.blit(restart_text, (width // 2 - 150, height // 2 - 100))
@@ -259,6 +285,7 @@ while RUNNING:
 
 # Shuts down pygame modules
 pygame.quit()  # pylint: disable=no-member
+
 
 # Exits the python script
 sys.exit()  # pylint: disable=no-member
