@@ -11,7 +11,7 @@ If the user moves on a red light the game will end. The game focuses on testing 
 
 - Scrolling Background: The road scrolls in the background. Giving the illusion of movement.
 
-- Car Animation: The car bounces up and down using a simple trigometry equation. Furthing the illusion of movement.
+- Car Animation: The car bounces up and down using a simple trigonometry equation. Furthering the illusion of movement.
 
 - Miles to Home: Tracks the distance the car drives in miles based off of pixel movement.
 
@@ -28,6 +28,7 @@ If the user moves on a red light the game will end. The game focuses on testing 
 
 **A big THANK YOU to...**
 
-- VECTEEZY: For the car image!! (https://www.vecteezy.com/)
-- NCLabs: For getting me started on my coding journey.
-- Pygame: For providing a fantastic framework for creating 2D games in Python.
+- VECTEEZY: For their car image. (https://www.vecteezy.com/)
+- Pixabay: For their stock mp3 audio. (https://pixabay.com/)
+- NCLabs: For getting me started on my coding journey. (https://nclab.com/)
+- Pygame: For providing a fantastic framework for creating 2D games in Python. (https://www.pygame.org/)
