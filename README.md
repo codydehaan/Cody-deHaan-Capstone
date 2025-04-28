@@ -26,7 +26,7 @@ If the user moves on a red light the game will end. The game focuses on testing 
 
 ## Acknowledgements
 
-**A big THANK YOU to...**
+**A BIG THANK YOU TO...**
 
 - VECTEEZY: For their car image. (https://www.vecteezy.com/)
 - Pixabay: For their stock mp3 audio. (https://pixabay.com/)
