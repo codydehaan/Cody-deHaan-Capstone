@@ -37,14 +37,51 @@ If the user moves on a red light the game will end. The game focuses on testing 
 
 ### Table of Contents
 
+# Table of Contents
+
 - [1-5: Setup & Assets](#1-5-setup-assets)
+
+  - [1. Imports](#1-imports)
+  - [2. Initialize Pygame](#2-initialize-pygame)
+  - [3. Set up the game window](#3-set-up-the-game-window)
+  - [4. Load Images](#4-load-images)
+  - [5. Load Sound](#5-load-sound)
+
 - [6-10: Game & Visual State](#6-10-game-visual-state)
+
+  - [6. Car's state](#6-cars-state)
+  - [7. Traffic Light State](#7-traffic-light-state)
+  - [8. Game State](#8-game-state)
+  - [9. Scrolling](#9-scrolling)
+  - [10. Colors](#10-colors)
+
 - [11: Background Rendering](#11-background-rendering)
+
 - [12-14: UX Functions](#12-14-ux-functions)
+
+  - [12. Game Instructions Function](#12-game-instructions-function)
+  - [13. Show Countdown Function](#13-show-countdown-function)
+  - [14. Reset Game Function](#14-reset-game-function)
+
 - [15: Game Loop Start](#15-game-loop-start)
+
 - [16-19: Core Gameplay Logic](#16-19-core-gameplay-logic)
+
+  - [16. Event Handler](#16-event-handler)
+  - [17. Update Light](#17-update-light)
+  - [18. Update Scroll](#18-update-scroll)
+  - [19. Check Violation](#19-check-violation)
+
 - [20-23: Rendering & Display](#20-23-rendering-display)
+
+  - [20. Draw Scrolling Background](#20-draw-scrolling-background)
+  - [21. Car Animation](#21-car-animation)
+  - [22. Draw Traffic Light](#22-draw-traffic-light)
+  - [23. Calculate Miles Left](#23-calculate-miles-left)
+
 - [24-25: Game Over & Exit](#24-25-game-over-exit)
+  - [24. Show Game Over](#24-show-game-over)
+  - [25. Shutdown & Exit](#25-shutdown-exit)
 
 ### 1-5: Setup & Assets
 
