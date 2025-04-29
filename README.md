@@ -154,7 +154,7 @@ CAR_LOCK = pygame.mixer.Sound("Audio/Car_Lock.mp3")
 
 ### 11: Background Rendering
 
-    **Section 11 creates the game's background by generating a gray road surface that fills the entire game window. It then adds white road stripes at regular intervals across the center of the screen to simulate lane markers.**
+**Section 11 creates the game's background by generating a gray road surface that fills the entire game window. It then adds white road stripes at regular intervals across the center of the screen to simulate lane markers.**
 
 11. Load background & fill
 
