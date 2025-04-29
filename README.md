@@ -35,114 +35,68 @@ If the user moves on a red light the game will end. The game focuses on testing 
 
 # Deep Dive the Code
 
-### Table of Contents
-
-- [1-5: Setup & Assets](#1-5-setup-assets)
-
-  - [1. Imports](#1-imports)
-  - [2. Initialize Pygame](#2-initialize-pygame)
-  - [3. Set up the game window](#3-set-up-the-game-window)
-  - [4. Load Images](#4-load-images)
-  - [5. Load Sound](#5-load-sound)
-
-- [6-10: Game & Visual State](#6-10-game-visual-state)
-
-  - [6. Car's state](#6-cars-state)
-  - [7. Traffic Light State](#7-traffic-light-state)
-  - [8. Game State](#8-game-state)
-  - [9. Scrolling](#9-scrolling)
-  - [10. Colors](#10-colors)
-
-- [11: Background Rendering](#11-background-rendering)
-
-- [12-14: UX Functions](#12-14-ux-functions)
-
-  - [12. Game Instructions Function](#12-game-instructions-function)
-  - [13. Show Countdown Function](#13-show-countdown-function)
-  - [14. Reset Game Function](#14-reset-game-function)
-
-- [15: Game Loop Start](#15-game-loop-start)
-
-- [16-19: Core Gameplay Logic](#16-19-core-gameplay-logic)
-
-  - [16. Event Handler](#16-event-handler)
-  - [17. Update Light](#17-update-light)
-  - [18. Update Scroll](#18-update-scroll)
-  - [19. Check Violation](#19-check-violation)
-
-- [20-23: Rendering & Display](#20-23-rendering-display)
-
-  - [20. Draw Scrolling Background](#20-draw-scrolling-background)
-  - [21. Car Animation](#21-car-animation)
-  - [22. Draw Traffic Light](#22-draw-traffic-light)
-  - [23. Calculate Miles Left](#23-calculate-miles-left)
-
-- [24-25: Game Over & Exit](#24-25-game-over-exit)
-  - [24. Show Game Over](#24-show-game-over)
-  - [25. Shutdown & Exit](#25-shutdown-exit)
-
-### 1-5: Setup & Assets
+# 1-5: Setup & Assets
 
 **The first five sections(1-5) set up the core foundation for "Red Light, Green Light - Home From Work" using Pygame. They import essential libraries, initialize Pygame and its sound system, and configure the game window, fonts, images, and audio assets. Together, they make up the visual and audio environment needed for the gameplay, ensuring the game runs smoothly within a controlled window and frame rate.**
 
-## 1. Imports
+1. Imports
 
-```sh
-import sys  # Imports sys library for safe exit of the game
-import random  # Imports random to create random stoplight intervals
-import math  # Imports math used only for visual effects in cars movement
-import pygame  # Imports pygame package to create the game
-```
+   ```sh
+   import sys  # Imports sys library for safe exit of the game
+   import random  # Imports random to create random stoplight intervals
+   import math  # Imports math used only for visual effects in cars movement
+   import pygame  # Imports pygame package to create the game
+   ```
 
-## 2. Initialize Pygame
+2. Initialize Pygame
 
-```sh
-# Initializes all pygame modules (Fonts, images, graphics, events)
-pygame.init()  # pylint: disable=no-member
-# Initializes the sound module in Pygame
-pygame.mixer.init()  # pylint: disable=no-member
-```
+   ```sh
+   # Initializes all pygame modules (Fonts, images, graphics, events)
+   pygame.init()  # pylint: disable=no-member
+   # Initializes the sound module in Pygame
+   pygame.mixer.init()  # pylint: disable=no-member
+   ```
 
-## 3. Set up the game window
+3. Set up the game window
 
-```sh
-# Creates variables that set game the window
-width, height = 1000, 600
-screen = pygame.display.set_mode((width, height))  # Displays the window
-# Sets a caption for the window
-pygame.display.set_caption("Red Light, Green Light - Home From Work")
-clock = pygame.time.Clock()  # Creates variable allowing use of internal clock
-font = pygame.font.SysFont(None, 48)  # Creates variable for users system font
-```
+   ```sh
+   # Creates variables that set game the window
+   width, height = 1000, 600
+   screen = pygame.display.set_mode((width, height))  # Displays the window
+   # Sets a caption for the window
+   pygame.display.set_caption("Red Light, Green Light - Home From Work")
+   clock = pygame.time.Clock()  # Creates variable allowing use of internal clock
+   font = pygame.font.SysFont(None, 48)  # Creates variable for users system font
+   ```
 
-## 4. Load Images
+4. Load Images
 
-```sh
-CAR_IMG = pygame.transform.scale(
-pygame.image.load("Images/VECTEEZY_CAR_IMG.png"), (250, 200)
-)
-RED_LIGHT_IMG = pygame.image.load("Images/RED_LIGHT_IMG.png")
-YELLOW_LIGHT_IMG = pygame.image.load("Images/YELLOW_LIGHT_IMG.png")
-GREEN_LIGHT_IMG = pygame.image.load("Images/GREEN_LIGHT_IMG.png")
-# Car image uses (.transform.scale) to resize (.image.load) of the car
-```
+   ```sh
+   CAR_IMG = pygame.transform.scale(
+   pygame.image.load("Images/VECTEEZY_CAR_IMG.png"), (250, 200)
+   )
+   RED_LIGHT_IMG = pygame.image.load("Images/RED_LIGHT_IMG.png")
+   YELLOW_LIGHT_IMG = pygame.image.load("Images/YELLOW_LIGHT_IMG.png")
+   GREEN_LIGHT_IMG = pygame.image.load("Images/GREEN_LIGHT_IMG.png")
+   # Car image uses (.transform.scale) to resize (.image.load) of the car
+   ```
 
-## 5. Load Sound
+5. Load Sound
 
-```sh
-BG_AUDIO = pygame.mixer.music.load("Audio/Call_to_Adventure.mp3")
-pygame.mixer.music.set_volume(0.1)
-START_AUDIO = pygame.mixer.Sound("Audio/Zapsplat_Nissan_Start.mp3")
-ENGINE_AUDIO = pygame.mixer.Sound("Audio/AudiV8.mp3")
-BRAKE_AUDIO = pygame.mixer.Sound("Audio/Brake_Audio.mp3")
-CAR_LOCK = pygame.mixer.Sound("Audio/Car_Lock.mp3")
-```
+   ```sh
+   BG_AUDIO = pygame.mixer.music.load("Audio/Call_to_Adventure.mp3")
+   pygame.mixer.music.set_volume(0.1)
+   START_AUDIO = pygame.mixer.Sound("Audio/Zapsplat_Nissan_Start.mp3")
+   ENGINE_AUDIO = pygame.mixer.Sound("Audio/AudiV8.mp3")
+   BRAKE_AUDIO = pygame.mixer.Sound("Audio/Brake_Audio.mp3")
+   CAR_LOCK = pygame.mixer.Sound("Audio/Car_Lock.mp3")
+   ```
 
 **These next five sections(6-10) define the game's dynamic elements and visual settings. They set the initial state of the car, including its position, speed, and whether it's moving. The traffic light system is initialized with a default green state and timing logic for when it should change. Game state variables track whether the game has started, ended, or been won, while the scroll system measures the car’s progress across the screen. Finally, predefined color values are established to simplify and organize the use of color throughout the game’s interface and visual elements.**
 
-### 6-10: Game & Visual State
+### 6-10: Game Visual State
 
-6. Car's state
+6. Car state
 
    ```sh
    CAR_X = 350  # Cars x position
@@ -154,7 +108,7 @@ CAR_LOCK = pygame.mixer.Sound("Audio/Car_Lock.mp3")
 
 7. Traffic Light State
 
-   ```sh
+   ```
    LIGHT_COLOR = "green"  # Light set to green to begin game
    # Creates a variable for the milliseconds since the game started
    LAST_SWITCH_TIME = pygame.time.get_ticks()
@@ -191,7 +145,7 @@ CAR_LOCK = pygame.mixer.Sound("Audio/Car_Lock.mp3")
 
 ### 11: Background Rendering
 
-## 11. Load background & fill
+11. Load background & fill
 
     ```sh
     # Creates variable creating the games road surface
@@ -214,7 +168,7 @@ CAR_LOCK = pygame.mixer.Sound("Audio/Car_Lock.mp3")
 
 ### 12-14: UX Functions
 
-## 12. Game Instructions Function
+12. Game Instructions Function
 
     ```sh
     def game_instructions():
@@ -240,7 +194,7 @@ CAR_LOCK = pygame.mixer.Sound("Audio/Car_Lock.mp3")
         pygame.time.delay(3000)
     ```
 
-## 13. Show Countdown Function
+13. Show Countdown Function
 
     ```sh
     def show_countdown():
@@ -260,7 +214,7 @@ CAR_LOCK = pygame.mixer.Sound("Audio/Car_Lock.mp3")
         pygame.time.delay(1500)  # Delays 1.5 seconds to simulate countdown
     ```
 
-## 14. Reset Game Function
+14. Reset Game Function
 
     ```sh
     def reset_game():
@@ -286,7 +240,7 @@ CAR_LOCK = pygame.mixer.Sound("Audio/Car_Lock.mp3")
 
 ### 15: Game Loop Start
 
-## 15. Main Game Loop
+15. Main Game Loop
 
     ```sh
     RUNNING = True
@@ -308,7 +262,7 @@ CAR_LOCK = pygame.mixer.Sound("Audio/Car_Lock.mp3")
 
 ### 16-19: Core Gameplay Logic
 
-## 16. Event Handler
+16. Event Handler
 
     ```sh
     for event in pygame.event.get():  # Process all events in the event queue
@@ -338,7 +292,7 @@ CAR_LOCK = pygame.mixer.Sound("Audio/Car_Lock.mp3")
                     reset_game()  # Calls function to reset the game
     ```
 
-## 17. Update Light
+17. Update Light
 
     ```sh
     current_time = pygame.time.get_ticks()  # Captures the current time
@@ -358,7 +312,7 @@ CAR_LOCK = pygame.mixer.Sound("Audio/Car_Lock.mp3")
         LAST_SWITCH_TIME = current_time
     ```
 
-## 18. Update Scroll
+18. Update Scroll
 
     ```sh
     if MOVING and not GAME_OVER:  # If moving is True and game_over is False
@@ -368,7 +322,7 @@ CAR_LOCK = pygame.mixer.Sound("Audio/Car_Lock.mp3")
         WIN = True  # User wins
     ```
 
-## 19. Check Violation
+19. Check Violation
 
     ```sh
     if MOVING and LIGHT_COLOR == "red":  # If moving is True during "red"
@@ -379,7 +333,7 @@ CAR_LOCK = pygame.mixer.Sound("Audio/Car_Lock.mp3")
 
 ### 20-23: Rendering & Display
 
-## 20. Draw Scrolling Background
+20. Draw Scrolling Background
 
     ```sh
     SCROLL_X = SCROLL % width  # Creates a variable that loops 999-0
@@ -393,7 +347,7 @@ CAR_LOCK = pygame.mixer.Sound("Audio/Car_Lock.mp3")
     screen.blit(CAR_IMG, (CAR_X, CAR_Y))
     ```
 
-## 21. Car Animation
+21. Car Animation
 
     ```sh
     if MOVING:  # If moving is True
@@ -403,7 +357,7 @@ CAR_LOCK = pygame.mixer.Sound("Audio/Car_Lock.mp3")
         # Dividing by 100 allows slowing of the bounce
     ```
 
-## 22. Draw Traffic Light
+22. Draw Traffic Light
 
     ```sh
      # Creates a variable for the position of the stoplight
@@ -419,7 +373,7 @@ CAR_LOCK = pygame.mixer.Sound("Audio/Car_Lock.mp3")
         screen.blit(RED_LIGHT_IMG, light_pos)
     ```
 
-## 23. Calculate Miles Left
+23. Calculate Miles Left
 
     ```sh
     # Variable calculating how far is left in pixels,
@@ -435,7 +389,7 @@ CAR_LOCK = pygame.mixer.Sound("Audio/Car_Lock.mp3")
 
 ### 24-25: Game Over & Exit
 
-## 24. Show Game Over
+24. Show Game Over
 
     ```sh
     if GAME_OVER:  # If game_over is True
@@ -459,7 +413,7 @@ CAR_LOCK = pygame.mixer.Sound("Audio/Car_Lock.mp3")
     pygame.display.flip()
     ```
 
-## 25. Shutdown & Exit
+25. Shutdown & Exit
 
     ```sh
     # Shuts down pygame modules
