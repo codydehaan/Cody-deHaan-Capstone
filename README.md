@@ -46,7 +46,7 @@ If the user moves on a red light the game will end. The game focuses on testing 
 - [20–23: Rendering & Display](#20–23-rendering--display)
 - [24–25: Game Over & Exit](#24–25-game-over--exit)
 
-**The first five sections set up the core foundation for "Red Light, Green Light - Home From Work" using Pygame. They import essential libraries, initialize Pygame and its sound system, and configure the game window, fonts, images, and audio assets. Together, they make up the visual and audio environment needed for the gameplay, ensuring the game runs smoothly within a controlled window and frame rate.**
+**The first five sections(1-5) set up the core foundation for "Red Light, Green Light - Home From Work" using Pygame. They import essential libraries, initialize Pygame and its sound system, and configure the game window, fonts, images, and audio assets. Together, they make up the visual and audio environment needed for the gameplay, ensuring the game runs smoothly within a controlled window and frame rate.**
 
 1. Imports
    ```sh
@@ -92,7 +92,7 @@ If the user moves on a red light the game will end. The game focuses on testing 
    CAR_LOCK = pygame.mixer.Sound("Audio/Car_Lock.mp3")
    ```
 
-**These next five sections define the game's dynamic elements and visual settings. They set the initial state of the car, including its position, speed, and whether it's moving. The traffic light system is initialized with a default green state and timing logic for when it should change. Game state variables track whether the game has started, ended, or been won, while the scroll system measures the car’s progress across the screen. Finally, predefined color values are established to simplify and organize the use of color throughout the game’s interface and visual elements.**
+**These next five sections(6-10) define the game's dynamic elements and visual settings. They set the initial state of the car, including its position, speed, and whether it's moving. The traffic light system is initialized with a default green state and timing logic for when it should change. Game state variables track whether the game has started, ended, or been won, while the scroll system measures the car’s progress across the screen. Finally, predefined color values are established to simplify and organize the use of color throughout the game’s interface and visual elements.**
 
 6.  Car's state
     ```sh
@@ -131,7 +131,7 @@ If the user moves on a red light the game will end. The game focuses on testing 
     GRAY = (100, 100, 100)
     ```
 
-    **This section creates the game's background by generating a gray road surface that fills the entire game window. It then adds white road stripes at regular intervals across the center of the screen to simulate lane markers.**
+    **Section 11 creates the game's background by generating a gray road surface that fills the entire game window. It then adds white road stripes at regular intervals across the center of the screen to simulate lane markers.**
 
 11. Load background & fill
 
@@ -152,7 +152,7 @@ If the user moves on a red light the game will end. The game focuses on testing 
         # Each road stripe is w=20 and h=10
     ```
 
-    **These three functions support the game's user experience and flow. The game_instructions() function introduces the player to the controls and objective with clear, centered messages shown one at a time. The show_countdown() function builds anticipation and readiness by displaying a timed countdown before gameplay begins. The reset_game() function reinitializes all key game state variables, allowing the player to restart from the beginning after a win or loss. Together, these functions manage game pacing, player guidance, and replayability, ensuring a smooth and engaging experience.**
+    **Sections 12-14 are dedicated to functions. These three functions support the game's user experience and flow. The game_instructions() function introduces the player to the controls and objective with clear, centered messages shown one at a time. The show_countdown() function builds anticipation and readiness by displaying a timed countdown before gameplay begins. The reset_game() function reinitializes all key game state variables, allowing the player to restart from the beginning after a win or loss. Together, these functions manage game pacing, player guidance, and replayability, ensuring a smooth and engaging experience.**
 
 12. Game Instructions Function
     ```sh
@@ -240,7 +240,7 @@ If the user moves on a red light the game will end. The game focuses on testing 
         clock.tick(60)
     ```
 
-    **These next four blocks make up the core gameplay logic, checking for player input, updating traffic light states, scrolling the background to simulate movement, and enforcing game rules. The event handler listens for space-bar presses to control car motion and checks if the player attempts to move on a red light. The traffic light changes color based on timers and random intervals, creating unpredictable gameplay. As the car moves, the background scrolls to simulate progress. If the car scrolls far enough, the player wins. But if the car moves during a red light, the game ends immediately.**
+    **Sections 16-19 make up the core gameplay logic, checking for player input, updating traffic light states, scrolling the background to simulate movement, and enforcing game rules. The event handler listens for space-bar presses to control car motion and checks if the player attempts to move on a red light. The traffic light changes color based on timers and random intervals, creating unpredictable gameplay. As the car moves, the background scrolls to simulate progress. If the car scrolls far enough, the player wins. But if the car moves during a red light, the game ends immediately.**
 
 16. Event Handler
 
@@ -348,7 +348,7 @@ If the user moves on a red light the game will end. The game focuses on testing 
     # Draws "Miles to home: XX" at x = 20 y = 20
     screen.blit(miles_text, (20, 20))
     ```
-    **In the last two sections, the final part of the game loop checks whether the game is over and displays a win or loss message accordingly. All audio is then shut off. Players are prompted to press "R" to restart. Once the player quits the game, all Pygame modules are shut down and the script exits cleanly.**
+    **In the last two sections(24&25), the final part of the game loop checks whether the game is over and displays a win or loss message accordingly. All audio is then shut off. Players are prompted to press "R" to restart. Once the player quits the game, all Pygame modules are shut down and the script exits cleanly.**
 24. Show Game Over
 
     ```sh
