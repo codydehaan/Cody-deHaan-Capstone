@@ -227,7 +227,7 @@ CAR_LOCK = pygame.mixer.Sound("Audio/Car_Lock.mp3")
 
 14. Reset Game Function
 
-    ````sh
+    ```sh
     def reset_game():
     """
     Resets globally defined variables to reset the game.
@@ -245,13 +245,11 @@ CAR_LOCK = pygame.mixer.Sound("Audio/Car_Lock.mp3")
         SCROLL = 0  # Reset the scroll state
         WIN = False  # Reset the win state
         GAME_STARTED = False  # Reset the game started state
-        ```
-    ````
+    ```
 
 ### 15: Game Loop Start
 
 **This part of the main game loop handles the initial setup for the game. When the loop first starts, it checks if the game hasn't started (not GAME_STARTED). If true, it plays the background music on a loop, triggers the car start-up sound, displays game instructions and a countdown, then marks the game as started. After this setup, the loop continues to run, regulated by clock.tick(60), which limits updates to 60 frames per second for smooth and consistent gameplay.**
-````
 
 15. Main Game Loop
 
