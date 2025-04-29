@@ -1,7 +1,7 @@
 # Red Light, Green Light - Home From Work
 
 A simple Pygame-based, 2D, road scrolling game. User controls a car driving home from work.
-If the user moves on a red light the game will end. The game focuses on testing the users reflexes until the "Mile to home:" counter reaches 0.
+If the user moves on a red light the game will end. The game focuses on testing the users reflexes until the "Miles to home:" counter reaches 0.
 
 # Key Features
 
@@ -22,7 +22,7 @@ If the user moves on a red light the game will end. The game focuses on testing 
 ## Requirements
 
 - Python 3.13
-- Pygame: To install this dependency use 'pip'.
+- Pygame: To install this dependency use 'pip install pygame' or 'pip3 install pygame'.
 
 ## Acknowledgements
 
@@ -32,3 +32,13 @@ If the user moves on a red light the game will end. The game focuses on testing 
 - Pixabay: For their stock mp3 audio. (https://pixabay.com/)
 - NCLab: For getting me started on my coding journey. (https://nclab.com/)
 - Pygame: For providing a fantastic framework for creating 2D games in Python. (https://www.pygame.org/)
+
+# Deep Dive the Code
+
+1. Imports
+   ```sh
+   import sys  # Imports sys library for safe exit of the game
+   import random  # Imports random to create random stoplight intervals
+   import math  # Imports math used only for visual effects in cars movement
+   import pygame  # Imports pygame package to create the game
+   ```

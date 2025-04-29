@@ -84,6 +84,7 @@ for stripe in range(
     pygame.draw.rect(road_surface, WHITE, (stripe, height // 2, 20, 10))
     # Every 40th x position half(//2) the height
     # Each road stripe is w=20 and h=10
+
 # Game Instructions
 
 
@@ -136,18 +137,20 @@ def show_countdown():
 def reset_game():
     """
     Resets globally defined variables to reset the game.
+    This function is called when the game ends and restarts the game.
     """
     global LIGHT_COLOR, LAST_SWITCH_TIME, LIGHT_DURATION
     global MOVING, GAME_OVER, SCROLL, WIN, GAME_STARTED
 
-    LIGHT_COLOR = "green"
+    LIGHT_COLOR = "green"  # Reset traffic light color to green
+    # Reset the time of the last traffic light switch
     LAST_SWITCH_TIME = pygame.time.get_ticks()
-    LIGHT_DURATION = 18000
-    MOVING = False
-    GAME_OVER = False
-    SCROLL = 0
-    WIN = False
-    GAME_STARTED = False
+    LIGHT_DURATION = 18000  # Reset the traffic light duration
+    MOVING = False  # Reset the car's movement state
+    GAME_OVER = False  # Reset the game over state
+    SCROLL = 0  # Reset the scroll state
+    WIN = False  # Reset the win state
+    GAME_STARTED = False  # Reset the game started state
 
 
 # Main Game Loop
