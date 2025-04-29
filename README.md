@@ -122,17 +122,21 @@ If the user moves on a red light the game will end. The game focuses on testing 
     PIXELS_PER_MILES = 1000  # Used to convert pixels to miles
     ```
 10. Colors
-    `sh
+
+    ```sh
     WHITE = (255, 255, 255)  # These color variables were
     BLACK = (0, 0, 0)  # Created to organize coloring of items
     RED = (200, 0, 0)  # Used in fonts, backgrounds, and fills
     GREEN = (0, 200, 0)  # Used to make later code easier to read
     GRAY = (100, 100, 100)
-    `
+    ```
+
     **This section creates the game's background by generating a gray road surface that fills the entire game window. It then adds white road stripes at regular intervals across the center of the screen to simulate lane markers.**
 
 11. Load background & fill
-    ```sh # Creates variable creating the games road surface
+
+    ```sh
+    # Creates variable creating the games road surface
     road_surface = pygame.Surface((width, height))
     road_surface.fill(GRAY) # Fills the surface with GRAY
 
@@ -146,7 +150,7 @@ If the user moves on a red light the game will end. The game focuses on testing 
         pygame.draw.rect(road_surface, WHITE, (stripe, height // 2, 20, 10))
         # Every 40th x position half(//2) the height
         # Each road stripe is w=20 and h=10
-        ```
+    ```
 
     **These three functions support the game's user experience and flow. The game_instructions() function introduces the player to the controls and objective with clear, centered messages shown one at a time. The show_countdown() function builds anticipation and readiness by displaying a timed countdown before gameplay begins. The reset_game() function reinitializes all key game state variables, allowing the player to restart from the beginning after a win or loss. Together, these functions manage game pacing, player guidance, and replayability, ensuring a smooth and engaging experience.**
 
@@ -193,7 +197,8 @@ If the user moves on a red light the game will end. The game focuses on testing 
         pygame.time.delay(1500)  # Delays 1.5 seconds to simulate countdown
     ```
 14. Reset Game Function
-    ```sh
+
+    ````sh
     def reset_game():
     """
     Resets globally defined variables to reset the game.
@@ -214,6 +219,8 @@ If the user moves on a red light the game will end. The game focuses on testing 
         ```
 
     **This part of the main game loop handles the initial setup for the game. When the loop first starts, it checks if the game hasn't started (not GAME_STARTED). If true, it plays the background music on a loop, triggers the car start-up sound, displays game instructions and a countdown, then marks the game as started. After this setup, the loop continues to run, regulated by clock.tick(60), which limits updates to 60 frames per second for smooth and consistent gameplay.**
+
+    ````
 
 15. Main Game Loop
 
