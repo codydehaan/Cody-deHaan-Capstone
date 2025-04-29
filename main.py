@@ -69,7 +69,7 @@ RED = (200, 0, 0)  # Used in fonts, backgrounds, and fills
 GREEN = (0, 200, 0)  # Used to make later code easier to read
 GRAY = (100, 100, 100)
 
-# Load background road fill
+# Load background & fill
 # Creates variable creating the games road surface
 road_surface = pygame.Surface((width, height))
 road_surface.fill(GRAY)  # Fills the surface with GRAY
