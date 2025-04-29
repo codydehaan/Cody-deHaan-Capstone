@@ -104,7 +104,7 @@ If the user moves on a red light the game will end. The game focuses on testing 
 
 7. Traffic Light State
 
-   ```
+   ```sh
    LIGHT_COLOR = "green"  # Light set to green to begin game
    # Creates a variable for the milliseconds since the game started
    LAST_SWITCH_TIME = pygame.time.get_ticks()
