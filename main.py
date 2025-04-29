@@ -12,8 +12,8 @@ pygame.init()  # pylint: disable=no-member
 # Initializes the sound module in Pygame
 pygame.mixer.init()  # pylint: disable=no-member
 
-# Set up the window
-# Creates variables that set game window W and H (pixels)
+# Set up the game window
+# Creates variables that set game the window
 width, height = 1000, 600
 screen = pygame.display.set_mode((width, height))  # Displays the window
 # Sets a caption for the window
