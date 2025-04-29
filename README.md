@@ -37,14 +37,14 @@ If the user moves on a red light the game will end. The game focuses on testing 
 
 ### Table of Contents
 
-- [1–5: Setup & Assets](#1–5-setup--assets)
-- [6–10: Game & Visual State](#6–10-game--visual-state)
+- [1-5: Setup & Assets](#1-5-setup-assets)
+- [6-10: Game & Visual State](#6-10-game-visual-state)
 - [11: Background Rendering](#11-background-rendering)
-- [12–14: UX Functions](#12–14-ux-functions)
+- [12-14: UX Functions](#12-14-ux-functions)
 - [15: Game Loop Start](#15-game-loop-start)
-- [16–19: Core Gameplay Logic](#16–19-core-gameplay-logic)
-- [20–23: Rendering & Display](#20–23-rendering--display)
-- [24–25: Game Over & Exit](#24–25-game-over--exit)
+- [16-19: Core Gameplay Logic](#16-19-core-gameplay-logic)
+- [20-23: Rendering & Display](#20-23-rendering-display)
+- [24-25: Game Over & Exit](#24-25-game-over-exit)
 
 **The first five sections(1-5) set up the core foundation for "Red Light, Green Light - Home From Work" using Pygame. They import essential libraries, initialize Pygame and its sound system, and configure the game window, fonts, images, and audio assets. Together, they make up the visual and audio environment needed for the gameplay, ensuring the game runs smoothly within a controlled window and frame rate.**
 
