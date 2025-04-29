@@ -46,9 +46,11 @@ If the user moves on a red light the game will end. The game focuses on testing 
 - [20-23: Rendering & Display](#20-23-rendering-display)
 - [24-25: Game Over & Exit](#24-25-game-over-exit)
 
+### 1-5: Setup & Assets
+
 **The first five sections(1-5) set up the core foundation for "Red Light, Green Light - Home From Work" using Pygame. They import essential libraries, initialize Pygame and its sound system, and configure the game window, fonts, images, and audio assets. Together, they make up the visual and audio environment needed for the gameplay, ensuring the game runs smoothly within a controlled window and frame rate.**
 
-### 1. Imports
+1. Imports
 
 ```sh
 import sys  # Imports sys library for safe exit of the game
@@ -57,7 +59,7 @@ import math  # Imports math used only for visual effects in cars movement
 import pygame  # Imports pygame package to create the game
 ```
 
-### 2. Initialize Pygame
+2. Initialize Pygame
 
 ```sh
 # Initializes all pygame modules (Fonts, images, graphics, events)
@@ -66,7 +68,7 @@ pygame.init()  # pylint: disable=no-member
 pygame.mixer.init()  # pylint: disable=no-member
 ```
 
-### 3. Set up the game window
+3. Set up the game window
 
 ```sh
 # Creates variables that set game the window
@@ -78,7 +80,7 @@ clock = pygame.time.Clock()  # Creates variable allowing use of internal clock
 font = pygame.font.SysFont(None, 48)  # Creates variable for users system font
 ```
 
-### 4. Load Images
+4. Load Images
 
 ```sh
 CAR_IMG = pygame.transform.scale(
@@ -90,7 +92,7 @@ GREEN_LIGHT_IMG = pygame.image.load("Images/GREEN_LIGHT_IMG.png")
 # Car image uses (.transform.scale) to resize (.image.load) of the car
 ```
 
-### 5. Load Sound
+5. Load Sound
 
 ```sh
 BG_AUDIO = pygame.mixer.music.load("Audio/Call_to_Adventure.mp3")
@@ -103,42 +105,44 @@ CAR_LOCK = pygame.mixer.Sound("Audio/Car_Lock.mp3")
 
 **These next five sections(6-10) define the game's dynamic elements and visual settings. They set the initial state of the car, including its position, speed, and whether it's moving. The traffic light system is initialized with a default green state and timing logic for when it should change. Game state variables track whether the game has started, ended, or been won, while the scroll system measures the car’s progress across the screen. Finally, predefined color values are established to simplify and organize the use of color throughout the game’s interface and visual elements.**
 
-### 6. Car's state
+### 6-10: Game & Visual State
 
-    ```sh
-    CAR_X = 350  # Cars x position
-    CAR_Y = 350  # Cars y position
-    CAR_SPEED = 10  # How fast we want the car to "move" in pixels
-    MOVING = False  # Car stopped before beginning game
-    CAR_LOCK_PLAYED = False  # Allows car lock audio to play once
-    ```
+6. Car's state
 
-### 7. Traffic Light State
+   ```sh
+   CAR_X = 350  # Cars x position
+   CAR_Y = 350  # Cars y position
+   CAR_SPEED = 10  # How fast we want the car to "move" in pixels
+   MOVING = False  # Car stopped before beginning game
+   CAR_LOCK_PLAYED = False  # Allows car lock audio to play once
+   ```
 
-    ```sh
-    LIGHT_COLOR = "green"  # Light set to green to begin game
-    # Creates a variable for the milliseconds since the game started
-    LAST_SWITCH_TIME = pygame.time.get_ticks()
-    LIGHT_DURATION = 18000  # Green through the countdown and instructions
-    ```
+7. Traffic Light State
 
-### 8. Game State
+   ```sh
+   LIGHT_COLOR = "green"  # Light set to green to begin game
+   # Creates a variable for the milliseconds since the game started
+   LAST_SWITCH_TIME = pygame.time.get_ticks()
+   LIGHT_DURATION = 18000  # Green through the countdown and instructions
+   ```
 
-    ```sh
-    GAME_OVER = False  # Games ending status
-    WIN = False  # Games win status
-    GAME_STARTED = False  # Games start status
-    ```
+8. Game State
 
-### 9. Scrolling
+   ```sh
+   GAME_OVER = False  # Games ending status
+   WIN = False  # Games win status
+   GAME_STARTED = False  # Games start status
+   ```
 
-    ```sh
-    SCROLL = 0  # Tracks in pixels how far the background has scrolled
-    MAX_SCROLL = 1000  # Distance in pixels needed to trigger win
-    PIXELS_PER_MILES = 1000  # Used to convert pixels to miles
-    ```
+9. Scrolling
 
-### 10. Colors
+   ```sh
+   SCROLL = 0  # Tracks in pixels how far the background has scrolled
+   MAX_SCROLL = 1000  # Distance in pixels needed to trigger win
+   PIXELS_PER_MILES = 1000  # Used to convert pixels to miles
+   ```
+
+10. Colors
 
     ```sh
     WHITE = (255, 255, 255)  # These color variables were
@@ -148,9 +152,11 @@ CAR_LOCK = pygame.mixer.Sound("Audio/Car_Lock.mp3")
     GRAY = (100, 100, 100)
     ```
 
+### 11: Background Rendering
+
     **Section 11 creates the game's background by generating a gray road surface that fills the entire game window. It then adds white road stripes at regular intervals across the center of the screen to simulate lane markers.**
 
-### 11. Load background & fill
+11. Load background & fill
 
     ```sh
     # Creates variable creating the games road surface
@@ -169,9 +175,11 @@ CAR_LOCK = pygame.mixer.Sound("Audio/Car_Lock.mp3")
         # Each road stripe is w=20 and h=10
     ```
 
-    **Sections 12-14 are dedicated to functions. These three functions support the game's user experience and flow. The game_instructions() function introduces the player to the controls and objective with clear, centered messages shown one at a time. The show_countdown() function builds anticipation and readiness by displaying a timed countdown before gameplay begins. The reset_game() function reinitializes all key game state variables, allowing the player to restart from the beginning after a win or loss. Together, these functions manage game pacing, player guidance, and replayability, ensuring a smooth and engaging experience.**
+### 12-14: UX Functions
 
-### 12. Game Instructions Function
+**Sections 12-14 are dedicated to functions. These three functions support the game's user experience and flow. The game_instructions() function introduces the player to the controls and objective with clear, centered messages shown one at a time. The show_countdown() function builds anticipation and readiness by displaying a timed countdown before gameplay begins. The reset_game() function reinitializes all key game state variables, allowing the player to restart from the beginning after a win or loss. Together, these functions manage game pacing, player guidance, and replayability, ensuring a smooth and engaging experience.**
+
+12. Game Instructions Function
 
     ```sh
     def game_instructions():
@@ -197,7 +205,7 @@ CAR_LOCK = pygame.mixer.Sound("Audio/Car_Lock.mp3")
         pygame.time.delay(3000)
     ```
 
-### 13. Show Countdown Function
+13. Show Countdown Function
 
     ```sh
     def show_countdown():
@@ -217,7 +225,7 @@ CAR_LOCK = pygame.mixer.Sound("Audio/Car_Lock.mp3")
         pygame.time.delay(1500)  # Delays 1.5 seconds to simulate countdown
     ```
 
-### 14. Reset Game Function
+14. Reset Game Function
 
     ````sh
     def reset_game():
@@ -238,12 +246,14 @@ CAR_LOCK = pygame.mixer.Sound("Audio/Car_Lock.mp3")
         WIN = False  # Reset the win state
         GAME_STARTED = False  # Reset the game started state
         ```
-
-    **This part of the main game loop handles the initial setup for the game. When the loop first starts, it checks if the game hasn't started (not GAME_STARTED). If true, it plays the background music on a loop, triggers the car start-up sound, displays game instructions and a countdown, then marks the game as started. After this setup, the loop continues to run, regulated by clock.tick(60), which limits updates to 60 frames per second for smooth and consistent gameplay.**
-
     ````
 
-### 15. Main Game Loop
+### 15: Game Loop Start
+
+**This part of the main game loop handles the initial setup for the game. When the loop first starts, it checks if the game hasn't started (not GAME_STARTED). If true, it plays the background music on a loop, triggers the car start-up sound, displays game instructions and a countdown, then marks the game as started. After this setup, the loop continues to run, regulated by clock.tick(60), which limits updates to 60 frames per second for smooth and consistent gameplay.**
+````
+
+15. Main Game Loop
 
     ```sh
     RUNNING = True
@@ -261,9 +271,11 @@ CAR_LOCK = pygame.mixer.Sound("Audio/Car_Lock.mp3")
         clock.tick(60)
     ```
 
-    **Sections 16-19 make up the core gameplay logic, checking for player input, updating traffic light states, scrolling the background to simulate movement, and enforcing game rules. The event handler listens for space-bar presses to control car motion and checks if the player attempts to move on a red light. The traffic light changes color based on timers and random intervals, creating unpredictable gameplay. As the car moves, the background scrolls to simulate progress. If the car scrolls far enough, the player wins. But if the car moves during a red light, the game ends immediately.**
+### 16-19: Core Gameplay Logic
 
-### 16. Event Handler
+**Sections 16-19 make up the core gameplay logic, checking for player input, updating traffic light states, scrolling the background to simulate movement, and enforcing game rules. The event handler listens for space-bar presses to control car motion and checks if the player attempts to move on a red light. The traffic light changes color based on timers and random intervals, creating unpredictable gameplay. As the car moves, the background scrolls to simulate progress. If the car scrolls far enough, the player wins. But if the car moves during a red light, the game ends immediately.**
+
+16. Event Handler
 
     ```sh
     for event in pygame.event.get():  # Process all events in the event queue
@@ -293,7 +305,7 @@ CAR_LOCK = pygame.mixer.Sound("Audio/Car_Lock.mp3")
                     reset_game()  # Calls function to reset the game
     ```
 
-### 17. Update Light
+17. Update Light
 
     ```sh
     current_time = pygame.time.get_ticks()  # Captures the current time
@@ -313,7 +325,7 @@ CAR_LOCK = pygame.mixer.Sound("Audio/Car_Lock.mp3")
         LAST_SWITCH_TIME = current_time
     ```
 
-### 18. Update Scroll
+18. Update Scroll
 
     ```sh
     if MOVING and not GAME_OVER:  # If moving is True and game_over is False
@@ -323,15 +335,18 @@ CAR_LOCK = pygame.mixer.Sound("Audio/Car_Lock.mp3")
         WIN = True  # User wins
     ```
 
-### 19. Check Violation
+19. Check Violation
 
     ```sh
     if MOVING and LIGHT_COLOR == "red":  # If moving is True during "red"
         GAME_OVER = True  # Game is over
     ```
-    **Sections 20-23 manage how the game looks on-screen during play. A repeating background surface is drawn to simulate a road, while the car image stays in place. A bounce animation gives the car a more lively motion effect while it's moving. The current traffic light color is rendered in the corner, and the game displays how many "miles" remain until the player gets home.**
 
-### 20. Draw Scrolling Background
+### 20-23: Rendering & Display
+
+**Sections 20-23 manage how the game looks on-screen during play. A repeating background surface is drawn to simulate a road, while the car image stays in place. A bounce animation gives the car a more lively motion effect while it's moving. The current traffic light color is rendered in the corner, and the game displays how many "miles" remain until the player gets home.**
+
+20. Draw Scrolling Background
 
     ```sh
     SCROLL_X = SCROLL % width  # Creates a variable that loops 999-0
@@ -345,7 +360,7 @@ CAR_LOCK = pygame.mixer.Sound("Audio/Car_Lock.mp3")
     screen.blit(CAR_IMG, (CAR_X, CAR_Y))
     ```
 
-### 21. Car Animation
+21. Car Animation
 
     ```sh
     if MOVING:  # If moving is True
@@ -355,7 +370,7 @@ CAR_LOCK = pygame.mixer.Sound("Audio/Car_Lock.mp3")
         # Dividing by 100 allows slowing of the bounce
     ```
 
-### 22. Draw Traffic Light
+22. Draw Traffic Light
 
     ```sh
      # Creates a variable for the position of the stoplight
@@ -371,8 +386,7 @@ CAR_LOCK = pygame.mixer.Sound("Audio/Car_Lock.mp3")
         screen.blit(RED_LIGHT_IMG, light_pos)
     ```
 
-### 23. Calculate Miles Left
-
+23. Calculate Miles Left
     ```sh
     # Variable calculating how far is left in pixels,
     # then we convert that to miles, and use max to not go negative
@@ -382,9 +396,12 @@ CAR_LOCK = pygame.mixer.Sound("Audio/Car_Lock.mp3")
     # Draws "Miles to home: XX" at x = 20 y = 20
     screen.blit(miles_text, (20, 20))
     ```
-    **In the last two sections(24&25), the final part of the game loop checks whether the game is over and displays a win or loss message accordingly. All audio is then shut off. Players are prompted to press "R" to restart. Once the player quits the game, all Pygame modules are shut down and the script exits cleanly.**
 
-### 24. Show Game Over
+### 24-25: Game Over & Exit
+
+**In the last two sections(24&25), the final part of the game loop checks whether the game is over and displays a win or loss message accordingly. All audio is then shut off. Players are prompted to press "R" to restart. Once the player quits the game, all Pygame modules are shut down and the script exits cleanly.**
+
+24. Show Game Over
 
     ```sh
     if GAME_OVER:  # If game_over is True
@@ -408,7 +425,7 @@ CAR_LOCK = pygame.mixer.Sound("Audio/Car_Lock.mp3")
     pygame.display.flip()
     ```
 
-### 25. Shutdown & Exit
+25. Shutdown & Exit
 
     ```sh
     # Shuts down pygame modules
