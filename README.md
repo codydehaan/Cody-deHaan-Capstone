@@ -37,8 +37,6 @@ If the user moves on a red light the game will end. The game focuses on testing 
 
 ### Table of Contents
 
-# Table of Contents
-
 - [1-5: Setup & Assets](#1-5-setup-assets)
 
   - [1. Imports](#1-imports)
