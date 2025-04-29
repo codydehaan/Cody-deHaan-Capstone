@@ -54,11 +54,11 @@ LIGHT_DURATION = 18000  # Green through the countdown and instructions
 
 ## Game State ##
 GAME_OVER = False  # Games ending status
-SCROLL = 0  # Tracks in pixels how far the background has scrolled
 WIN = False  # Games win status
 GAME_STARTED = False  # Games start status
 
 ## Scrolling ##
+SCROLL = 0  # Tracks in pixels how far the background has scrolled
 MAX_SCROLL = 1000  # Distance in pixels needed to trigger win
 PIXELS_PER_MILES = 1000  # Used to convert pixels to miles
 

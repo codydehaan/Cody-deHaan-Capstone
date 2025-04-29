@@ -35,26 +35,22 @@ If the user moves on a red light the game will end. The game focuses on testing 
 
 # Deep Dive the Code
 
-## The first five sections set up the core foundation for "Red Light, Green Light - Home From Work" using Pygame. They import essential libraries, initialize Pygame and its sound system, and configure the game window, fonts, images, and audio assets. Together, they make up the visual and audio environment needed for the gameplay, ensuring the game runs smoothly within a controlled window and frame rate.
+**The first five sections set up the core foundation for "Red Light, Green Light - Home From Work" using Pygame. They import essential libraries, initialize Pygame and its sound system, and configure the game window, fonts, images, and audio assets. Together, they make up the visual and audio environment needed for the gameplay, ensuring the game runs smoothly within a controlled window and frame rate.**
 
 1. Imports
-
    ```sh
    import sys  # Imports sys library for safe exit of the game
    import random  # Imports random to create random stoplight intervals
    import math  # Imports math used only for visual effects in cars movement
    import pygame  # Imports pygame package to create the game
    ```
-
 2. Initialize Pygame
-
    ```sh
    # Initializes all pygame modules (Fonts, images, graphics, events)
    pygame.init()  # pylint: disable=no-member
    # Initializes the sound module in Pygame
    pygame.mixer.init()  # pylint: disable=no-member
    ```
-
 3. Set up the game window
    ```sh
    # Creates variables that set game the window
@@ -85,9 +81,40 @@ If the user moves on a red light the game will end. The game focuses on testing 
    CAR_LOCK = pygame.mixer.Sound("Audio/Car_Lock.mp3")
    ```
 
-##
+**These next five sections define the game's dynamic elements and visual settings. They set the initial state of the car, including its position, speed, and whether it's moving. The traffic light system is initialized with a default green state and timing logic for when it should change. Game state variables track whether the game has started, ended, or been won, while the scroll system measures the car’s progress across the screen. Finally, predefined color values are established to simplify and organize the use of color throughout the game’s interface and visual elements. Together, these components manage the logic and appearance needed for gameplay to function correctly.**
 
 6. Car's state
    ```sh
-
+   CAR_X = 350  # Cars x position
+   CAR_Y = 350  # Cars y position
+   CAR_SPEED = 10  # How fast we want the car to "move" in pixels
+   MOVING = False  # Car stopped before beginning game
+   CAR_LOCK_PLAYED = False  # Allows car lock audio to play once
    ```
+7. Traffic Light State
+   ```sh
+   LIGHT_COLOR = "green"  # Light set to green to begin game
+   # Creates a variable for the milliseconds since the game started
+   LAST_SWITCH_TIME = pygame.time.get_ticks()
+   LIGHT_DURATION = 18000  # Green through the countdown and instructions
+   ```
+8. Game State
+   ```sh
+   GAME_OVER = False  # Games ending status
+   WIN = False  # Games win status
+   GAME_STARTED = False  # Games start status
+   ```
+9. Scrolling
+   ```sh
+   SCROLL = 0  # Tracks in pixels how far the background has scrolled
+   MAX_SCROLL = 1000  # Distance in pixels needed to trigger win
+   PIXELS_PER_MILES = 1000  # Used to convert pixels to miles
+   ```
+10. Colors
+    ```sh
+    WHITE = (255, 255, 255)  # These color variables were
+    BLACK = (0, 0, 0)  # Created to organize coloring of items
+    RED = (200, 0, 0)  # Used in fonts, backgrounds, and fills
+    GREEN = (0, 200, 0)  # Used to make later code easier to read
+    GRAY = (100, 100, 100)
+    ```
