@@ -58,7 +58,7 @@ If the user moves on a red light the game will end. The game focuses on testing 
 3. Set up the game window
 
    ```sh
-   # Creates variables that set game the window
+   # Creates variables that set the game window
    width, height = 1000, 600
    screen = pygame.display.set_mode((width, height))  # Displays the window
    # Sets a caption for the window
