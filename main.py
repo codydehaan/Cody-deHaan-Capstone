@@ -59,7 +59,7 @@ GAME_STARTED = False  # Games start status
 
 ## Scrolling ##
 SCROLL = 0  # Tracks in pixels how far the background has scrolled
-MAX_SCROLL = 1000  # Distance in pixels needed to trigger win
+MAX_SCROLL = 20000  # Distance in pixels needed to trigger win
 PIXELS_PER_MILES = 1000  # Used to convert pixels to miles
 
 ## Colors ##
