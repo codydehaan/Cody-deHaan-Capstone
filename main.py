@@ -13,7 +13,7 @@ pygame.init()  # pylint: disable=no-member
 pygame.mixer.init()  # pylint: disable=no-member
 
 # Set up the game window
-# Creates variables that set game the window
+# Creates variables that set the game window
 width, height = 1000, 600
 screen = pygame.display.set_mode((width, height))  # Displays the window
 # Sets a caption for the window
@@ -32,7 +32,7 @@ GREEN_LIGHT_IMG = pygame.image.load("Images/GREEN_LIGHT_IMG.png")
 
 # Load Sound
 BG_AUDIO = pygame.mixer.music.load("Audio/Call_to_Adventure.mp3")
-pygame.mixer.music.set_volume(0.1)
+pygame.mixer.music.set_volume(0.1)  #Sets the game audio(0.0-1.0)
 START_AUDIO = pygame.mixer.Sound("Audio/Zapsplat_Nissan_Start.mp3")
 ENGINE_AUDIO = pygame.mixer.Sound("Audio/AudiV8.mp3")
 BRAKE_AUDIO = pygame.mixer.Sound("Audio/Brake_Audio.mp3")

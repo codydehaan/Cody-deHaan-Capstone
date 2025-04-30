@@ -1,6 +1,6 @@
 # Red Light, Green Light - Home From Work
 
-A simple Pygame-based, 2D, road scrolling game. User controls a car driving home from work.
+A simple Pygame-based, 2D, road scrolling game. The user controls a car driving home from work.
 If the user moves on a red light the game will end. The game focuses on testing the users reflexes until the "Miles to home:" counter reaches 0.
 
 # Key Features
@@ -58,7 +58,7 @@ If the user moves on a red light the game will end. The game focuses on testing 
 3. Set up the game window
 
    ```sh
-   # Creates variables that set game the window
+   # Creates variables that set the game window
    width, height = 1000, 600
    screen = pygame.display.set_mode((width, height))  # Displays the window
    # Sets a caption for the window
