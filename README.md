@@ -1,6 +1,6 @@
 # Red Light, Green Light - Spacebar Sprint
 
-<img src="Images/RLGL.gif" alt="Gameplay Demo" width="300">
+![Gameplay Demo](Images/RLGL.gif)
 
 **A simple Pygame-based, 2D, road scrolling game. The user controls the car with the spacebar, driving down a never ending road. If the user moves while the light is red, the game ends. The game focuses on testing the users reflexes.**
 
