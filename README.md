@@ -14,7 +14,7 @@
 
 - **Car Animation**: The car subtly bounces using simple trigonometry to enhance realism.
 
-- **Miles to Home**: Tracks the distance the car drives in miles, based off of pixel movement.
+- **Miles Driven**: Tracks the distance the car drives in miles, based off of pixel movement.
 
 - **Game Over Condition**: Game triggers a game over message if the car moves during red.
 
